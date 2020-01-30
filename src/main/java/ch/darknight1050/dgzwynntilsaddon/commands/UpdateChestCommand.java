@@ -11,31 +11,31 @@ import net.minecraftforge.client.IClientCommand;
 
 public class UpdateChestCommand extends CommandBase implements IClientCommand {
 
-	@Override
-	public String getName() {
-		return "updateChests";
-	}
+    @Override
+    public String getName() {
+        return "updateChests";
+    }
 
-	@Override
-	public String getUsage(ICommandSender sender) {
-		return "Updates Chests";
-	}
+    @Override
+    public String getUsage(ICommandSender sender) {
+        return "Updates Chests";
+    }
 
-	@Override
-	public int getRequiredPermissionLevel() {
-		return 0;
-	}
+    @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
 
-	@Override
-	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-		WebUtils.DownloadWaypoints();
-		WebUtils.UploadWaypoints();
-		sender.sendMessage(new TextComponentString(TextFormatting.GOLD + "Updated your Chests"));
-	}
+    @Override
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+        WebUtils.DownloadWaypoints();
+        WebUtils.UploadWaypoints();
+        sender.sendMessage(new TextComponentString(TextFormatting.GOLD + "Updated your Chests"));
+    }
 
-	@Override
-	public boolean allowUsageWithoutPrefix(ICommandSender sender, String message) {
-		return false;
-	}
+    @Override
+    public boolean allowUsageWithoutPrefix(ICommandSender sender, String message) {
+        return false;
+    }
 
 }
