@@ -2,7 +2,7 @@ package ch.darknight1050.dgzwynntilsaddon;
 
 import com.wynntils.core.framework.FrameworkManager;
 
-import ch.darknight1050.dgzwynntilsaddon.commands.UpdateChestCommand;
+import ch.darknight1050.dgzwynntilsaddon.commands.*;
 import ch.darknight1050.dgzwynntilsaddon.events.WynntilsEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -27,7 +27,8 @@ public class ModCore {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
-        ClientCommandHandler.instance.registerCommand(new UpdateChestCommand());
+        ClientCommandHandler.instance.registerCommand(new UpdateChestsCommand());
+        ClientCommandHandler.instance.registerCommand(new FixChestsCommand());
     }
 
     public static Minecraft mc() {

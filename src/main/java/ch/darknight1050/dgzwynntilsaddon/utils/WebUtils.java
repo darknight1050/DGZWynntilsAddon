@@ -52,7 +52,8 @@ public class WebUtils {
         }
     }
 
-    public static void DownloadWaypoints() {
+    public static int DownloadWaypoints() {
+        int count = 0;
         try {
             HttpClient client = HttpClients.createDefault();
             HttpPost post = new HttpPost(Reference.CONFIG.getDownloadURL());
@@ -74,8 +75,10 @@ public class WebUtils {
                 reader.close();
                 for (WaypointProfile profile : WaypointProfile.decode(sb.toString())) {
                     if (!MapConfig.Waypoints.INSTANCE.waypoints.stream().anyMatch(c -> c.getX() == profile.getX()
-                            && c.getY() == profile.getY() && c.getZ() == profile.getZ()))
+                            && c.getY() == profile.getY() && c.getZ() == profile.getZ())) {
                         MapConfig.Waypoints.INSTANCE.waypoints.add(profile);
+                        count++;
+                    }
                 }
                 MapConfig.Waypoints.INSTANCE.saveSettings(MapModule.getModule());
 
@@ -83,5 +86,6 @@ public class WebUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return count;
     }
 }
