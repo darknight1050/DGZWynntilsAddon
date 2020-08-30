@@ -45,7 +45,6 @@ public class FixChestsCommand extends CommandBase implements IClientCommand {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Reference.LOGGER.info("zoom: " + w.getZoomNeeded());
             }
         });
         MapConfig.Waypoints.INSTANCE.saveSettings(MapModule.getModule());
