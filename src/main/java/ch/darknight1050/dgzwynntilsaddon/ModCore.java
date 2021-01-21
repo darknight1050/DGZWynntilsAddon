@@ -29,6 +29,7 @@ public class ModCore {
     public void postInit(FMLPostInitializationEvent e) {
         ClientCommandHandler.instance.registerCommand(new UpdateChestsCommand());
         ClientCommandHandler.instance.registerCommand(new FixChestsCommand());
+        ClientCommandHandler.instance.registerCommand(new FixDuplicatesCommand());
     }
 
     public static Minecraft mc() {

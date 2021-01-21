@@ -30,6 +30,13 @@ public class UpdateChestsCommand extends CommandBase implements IClientCommand {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+        if(args.length >= 1) {
+            if(args[0].equalsIgnoreCase("force")) {
+                WebUtils.UploadWaypoints();
+                sender.sendMessage(new TextComponentString(TextFormatting.GOLD + "Uploaded your Chests!"));
+                return;
+            }
+        }
         int count = WebUtils.DownloadWaypoints();
         WebUtils.UploadWaypoints();
         sender.sendMessage(new TextComponentString(TextFormatting.GOLD + "Updated your Chests! " + TextFormatting.YELLOW
