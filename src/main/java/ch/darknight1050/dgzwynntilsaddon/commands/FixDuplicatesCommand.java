@@ -5,8 +5,8 @@ import java.util.List;
 import com.wynntils.modules.map.MapModule;
 import com.wynntils.modules.map.configs.MapConfig;
 import com.wynntils.modules.map.instances.WaypointProfile;
-import com.wynntils.modules.map.instances.WaypointProfile.WaypointType;
 
+import ch.darknight1050.dgzwynntilsaddon.ModCore;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -41,16 +41,10 @@ public class FixDuplicatesCommand extends CommandBase implements IClientCommand 
                 List<WaypointProfile> waypoints = MapConfig.Waypoints.INSTANCE.waypoints;
                 for (int i = 0; i < waypoints.size(); i++) {
                     WaypointProfile waypoint1 = waypoints.get(i);
-                    if (waypoint1.getType().equals(WaypointType.LOOTCHEST_T1)
-                            || waypoint1.getType().equals(WaypointType.LOOTCHEST_T2)
-                            || waypoint1.getType().equals(WaypointType.LOOTCHEST_T3)
-                            || waypoint1.getType().equals(WaypointType.LOOTCHEST_T4)) {
+                    if (ModCore.IsLootChest(waypoint1)) {
                         for (int j = i + 1; j < waypoints.size(); j++) {
                             WaypointProfile waypoint2 = waypoints.get(j);
-                            if (waypoint2.getType().equals(WaypointType.LOOTCHEST_T1)
-                                    || waypoint2.getType().equals(WaypointType.LOOTCHEST_T2)
-                                    || waypoint2.getType().equals(WaypointType.LOOTCHEST_T3)
-                                    || waypoint2.getType().equals(WaypointType.LOOTCHEST_T4)) {
+                            if (ModCore.IsLootChest(waypoint2)) {
                                 double diffX = waypoint2.getX() - waypoint1.getX();
                                 double diffY = waypoint2.getY() - waypoint1.getY();
                                 double diffZ = waypoint2.getZ() - waypoint1.getZ();
@@ -64,7 +58,7 @@ public class FixDuplicatesCommand extends CommandBase implements IClientCommand 
                 }
                 MapConfig.Waypoints.INSTANCE.saveSettings(MapModule.getModule());
                 sender.sendMessage(new TextComponentString(TextFormatting.GOLD + "Fixed " + TextFormatting.YELLOW + "["
-                        + count + "/" + MapConfig.Waypoints.INSTANCE.waypoints.size() + "]" + TextFormatting.GOLD
+                        + count + "/" + ModCore.GetWaypointsCount() + "]" + TextFormatting.GOLD
                         + " duplicated Chests!"));
                 return;
             } catch (Exception e) {

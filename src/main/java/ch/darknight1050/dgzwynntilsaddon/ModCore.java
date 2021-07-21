@@ -1,6 +1,9 @@
 package ch.darknight1050.dgzwynntilsaddon;
 
 import com.wynntils.core.framework.FrameworkManager;
+import com.wynntils.modules.map.configs.MapConfig;
+import com.wynntils.modules.map.instances.WaypointProfile;
+import com.wynntils.modules.map.instances.WaypointProfile.WaypointType;
 
 import ch.darknight1050.dgzwynntilsaddon.commands.*;
 import ch.darknight1050.dgzwynntilsaddon.events.WynntilsEvents;
@@ -36,4 +39,20 @@ public class ModCore {
         return Minecraft.getMinecraft();
     }
 
+    public static boolean IsLootChest(WaypointProfile waypoint) {
+        return waypoint.getType().equals(WaypointType.LOOTCHEST_T1)
+                || waypoint.getType().equals(WaypointType.LOOTCHEST_T2)
+                || waypoint.getType().equals(WaypointType.LOOTCHEST_T3)
+                || waypoint.getType().equals(WaypointType.LOOTCHEST_T4);
+    }
+    
+    public static int GetWaypointsCount() {
+        int waypointsCount = 0;
+        for(WaypointProfile waypoint : MapConfig.Waypoints.INSTANCE.waypoints) {
+            if(ModCore.IsLootChest(waypoint))
+                waypointsCount++;
+        }
+        return waypointsCount;
+    }
+    
 }

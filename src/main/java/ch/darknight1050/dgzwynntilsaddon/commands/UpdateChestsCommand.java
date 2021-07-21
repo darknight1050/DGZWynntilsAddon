@@ -1,7 +1,6 @@
 package ch.darknight1050.dgzwynntilsaddon.commands;
 
-import com.wynntils.modules.map.configs.MapConfig;
-
+import ch.darknight1050.dgzwynntilsaddon.ModCore;
 import ch.darknight1050.dgzwynntilsaddon.utils.WebUtils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -40,7 +39,7 @@ public class UpdateChestsCommand extends CommandBase implements IClientCommand {
         int count = WebUtils.DownloadWaypoints();
         WebUtils.UploadWaypoints();
         sender.sendMessage(new TextComponentString(TextFormatting.GOLD + "Updated your Chests! " + TextFormatting.YELLOW
-                + "[" + count + "/" + MapConfig.Waypoints.INSTANCE.waypoints.size() + "]"));
+                + "[" + count + "/" + ModCore.GetWaypointsCount() + "]"));
     }
 
     @Override

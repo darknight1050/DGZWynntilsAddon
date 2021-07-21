@@ -6,7 +6,7 @@ import com.wynntils.modules.map.MapModule;
 import com.wynntils.modules.map.configs.MapConfig;
 import com.wynntils.modules.map.instances.WaypointProfile.WaypointType;
 
-import ch.darknight1050.dgzwynntilsaddon.Reference;
+import ch.darknight1050.dgzwynntilsaddon.ModCore;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -35,8 +35,7 @@ public class FixChestsCommand extends CommandBase implements IClientCommand {
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         MapConfig.Waypoints.INSTANCE.waypoints.stream().forEach(w -> {
-            if (w.getType().equals(WaypointType.LOOTCHEST_T1) || w.getType().equals(WaypointType.LOOTCHEST_T2)
-                    || w.getType().equals(WaypointType.LOOTCHEST_T3) || w.getType().equals(WaypointType.LOOTCHEST_T4)) {
+            if (ModCore.IsLootChest(w)) {
                 w.setGroup(w.getType());
                 try {
                     Field zoomNeeded = w.getClass().getDeclaredField("zoomNeeded");
